@@ -14,5 +14,3 @@ env/
 # Environment variables
 .env
 
-# FastAPI/Uvicorn
-*.db
