@@ -1,4 +1,4 @@
-CREATE TABLE indent ( 
+CREATE TABLE IF NOT EXISTS indent ( 
     id INT AUTO_INCREMENT PRIMARY KEY, 
     product_number VARCHAR(50), 
     product_name VARCHAR(255), 
