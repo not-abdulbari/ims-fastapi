@@ -2,3 +2,4 @@ fastapi
 pandas
 mysql-connector-python
 python-dotenv
+python-multipart
