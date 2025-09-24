@@ -67,7 +67,7 @@ def extract_details(product_name, requested_quantity):
     elif dual_unit_range:
         min_val = float(dual_unit_range.group(1))
         max_val = float(dual_unit_range.group(3))
-        unit = dual_unit_range.group(2)
+        unit = dual_unit_range.group(2) 
         min_weight = min_val * requested_quantity
         max_weight = max_val * requested_quantity
 
