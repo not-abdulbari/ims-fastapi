@@ -48,6 +48,9 @@ def extract_details(product_name, requested_quantity):
     # Pattern 3: X - Y gm → e.g., 400 - 600 gm
     simple_range = re.search(r"([\d.]+)\s*-\s*([\d.]+)\s*(gm|g|kg)", product_name_lower)
 
+    # Pattern 3.1: (X - Y) gm/kg -> e.g., (500 - 600) gm 
+    bracketed_range_with_unit_after = re.search(r"\(\s*([\d.]+)\s*-\s*([\d.]+)\s*\)\s*(gm|g|kg)", product_name_lower)
+    
     # Pattern 4: Single weight → e.g., 500 gm
     single_value = re.search(r"([\d.]+)\s*(gm|g|kg)", product_name_lower)
 
@@ -72,6 +75,13 @@ def extract_details(product_name, requested_quantity):
         min_val = float(simple_range.group(1))
         max_val = float(simple_range.group(2))
         unit = simple_range.group(3)
+        min_weight = min_val * requested_quantity
+        max_weight = max_val * requested_quantity
+
+    elif bracketed_range_with_unit_after:  # Add this condition
+        min_val = float(bracketed_range_with_unit_after.group(1))
+        max_val = float(bracketed_range_with_unit_after.group(2))
+        unit = bracketed_range_with_unit_after.group(3)
         min_weight = min_val * requested_quantity
         max_weight = max_val * requested_quantity
 
