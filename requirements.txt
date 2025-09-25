@@ -1,5 +1,8 @@
 fastapi
+uvicorn
 pandas
-mysql-connector-python
+openpyxl
 python-dotenv
 python-multipart
+sqlalchemy
+pymysql

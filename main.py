@@ -1,24 +1,28 @@
-from fastapi import FastAPI
 from dotenv import load_dotenv
+
+load_dotenv()
+
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from controllers.indent_controller import router as indent_router
+import models
+from database import engine
 
-# Load environment variables
-load_dotenv()
+# This line tells SQLAlchemy to create all tables if they don't already exist.
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-# Add CORS middleware - place this right after creating the app
+
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust this in production to specific domains
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["Access-Control-Allow-Origin"]
 )
-
-
 
 # Register the indent controller routes
 app.include_router(indent_router, prefix="/api")
